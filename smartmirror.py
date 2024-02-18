@@ -83,21 +83,23 @@ icon_lookup = {
 def make_text_invisible():
     print("Making text invisible!!!!")
     for widget in root.winfo_children():
-        # Apply only to widgets that support text or foreground color change
-        if isinstance(widget, (Label, Button, Entry)):
-            try:
-                widget.config(foreground="black")  # Assuming black is your background color
-            except tkinter.TclError as e:
-                print(f"Error updating widget: {e}")
+        # # Apply only to widgets that support text or foreground color change
+        # if isinstance(widget, (Label, Button, Entry)):
+        #     try:
+        #         widget.config(foreground="black")  # Assuming black is your background color
+        #     except tkinter.TclError as e:
+        #         print(f"Error updating widget: {e}")
+        widget.pack_forget()  # Hide the widget
 
 # Function to make text visible for supported widgets
 def make_text_visible():
     for widget in root.winfo_children():
-        if isinstance(widget, (Label, Button, Entry)):
-            try:
-                widget.config(foreground="white")  # Change to your desired text color
-            except tkinter.TclError as e:
-                print(f"Error updating widget: {e}")
+        # # if isinstance(widget, (Label, Button, Entry)):
+        # try:
+        #     widget.config(foreground="white")  # Change to your desired text color
+        # except tkinter.TclError as e:
+        #     print(f"Error updating widget: {e}")
+        widget.pack() 
 
 
 class Reminders(Frame):
