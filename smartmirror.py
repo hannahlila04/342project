@@ -12,6 +12,8 @@ import requests
 import json
 import traceback
 import feedparser
+from tkinter import Label, Button, Entry  # Ensure to import specific widget types you're using
+
 
 from PIL import Image, ImageTk
 from contextlib import contextmanager
@@ -77,17 +79,24 @@ icon_lookup = {
 }
 
 
-# Function to make all text invisible
+# Function to make text invisible for supported widgets
 def make_text_invisible():
-    # Loop through all widgets and make their text color same as background color
     for widget in root.winfo_children():
-        widget.config(foreground="black")  # Change the text color to black
+        # Apply only to widgets that support text or foreground color change
+        if isinstance(widget, (Label, Button, Entry)):
+            try:
+                widget.config(foreground="black")  # Assuming black is your background color
+            except tkinter.TclError as e:
+                print(f"Error updating widget: {e}")
 
-# Function to make all text visible
+# Function to make text visible for supported widgets
 def make_text_visible():
-    # Loop through all widgets and make their text color white
     for widget in root.winfo_children():
-        widget.config(foreground="white")  # Change the text color to white
+        if isinstance(widget, (Label, Button, Entry)):
+            try:
+                widget.config(foreground="white")  # Change to your desired text color
+            except tkinter.TclError as e:
+                print(f"Error updating widget: {e}")
 
 
 class Reminders(Frame):
@@ -486,6 +495,13 @@ if __name__ == '__main__':
 
 
     root = tkinter.Tk()
+        # Create style for visible text
+    root.style_visible = ttk.Style()
+    root.style_visible.configure('Visible.TLabel', foreground='white')
+
+    # Create style for invisible text
+    root.style_invisible = ttk.Style()
+    root.style_invisible.configure('Invisible.TLabel', foreground='black')
     w = FullscreenWindow()
     make_text_invisible()
 
