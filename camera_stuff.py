@@ -93,6 +93,7 @@ def record():
     current_time = datetime.now()
     time_str = current_time.strftime('%Y-%m-%d_%H-%M-%S')
     unique_filename = f"dance_recording_{time_str}.mp4"
+    print(f"Recording to {unique_filename}")
 
     record_video(output_file=unique_filename, record_time=3)
 
