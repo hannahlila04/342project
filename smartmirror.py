@@ -463,6 +463,8 @@ if __name__ == '__main__':
 
     received_data = b''  # Initialize received_data before the loop
 
+    human_is_present = True  # Initialize the flag to False
+
     try:
         if not ser.is_open:
             ser.open()
@@ -472,12 +474,14 @@ if __name__ == '__main__':
 
         while True:
             if ser.in_waiting > 0:
-                # received_data = ser.readline().decode().strip()  # Read and decode the received data
-                # received_data = ser.readline().decode()
-                received_data = ser.read().decode('latin-1')  # Decode the incoming bytes as ASCII string
-                # received_data = "p 100 " +  str(i) # test value
-                print("Received data:", received_data)
-                # i += 1
+                # # received_data = ser.readline().decode().strip()  # Read and decode the received data
+                # # received_data = ser.readline().decode()
+                # received_data = ser.read().decode('latin-1')  # Decode the incoming bytes as ASCII string
+                # # received_data = "p 100 " +  str(i) # test value
+                # print("Received data:", received_data)
+                # # i += 1
+
+                human_is_present = True  # Initialize the flag to False
 
 
                 # Parse the received data
@@ -504,8 +508,10 @@ if __name__ == '__main__':
 
                 #     except ValueError:
                 #         print("Invalid sensor values.")
+            else:
+                human_is_present = False  # Initialize the flag to False
 
-            
+            print("Human is present:", human_is_present)            
 
 
     finally:
