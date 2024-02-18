@@ -94,7 +94,7 @@ class Reminders(Frame):
 
     def get_reminders(self):
         # Authentication and building the service
-        SCOPES = ['https://www.googleapis.com/auth/tasks.readonly']
+        SCOPES = ['https://www.googleapis.com/auth/tasks.readonly', 'https://www.googleapis.com/auth/drive.file']
         creds = None
         # The file token.json stores the user's access and refresh tokens, and is
         # created automatically when the authorization flow completes for the first
@@ -207,8 +207,11 @@ class Clock(Frame):
     def record_dance(self):
         # Placeholder for the actual recording functionality
         # record()
-        command = f"ssh hannahlila04@100.67.24.1 'python3.9 /path/to/camera_stuff.py'"
+        command = f" ssh anooprehman@100.66.88.216 '/Library/Frameworks/Python.framework/Versions/3.9/bin/python3.9 /Users/anooprehman/Documents/uoft/extracurricular/hackathons/makeuoft/342project/camera_stuff.py'"
         os.system(command)
+
+        #command2 = f" sshpass -p 'password' ssh anooprehman@ip '/Library/Frameworks/Python.framework/Versions/3.9/bin/python3.9 /Users/anooprehman/Documents/uoft/extracurricular/hackathons/makeuoft/342project/camera_stuff.py'";
+        #os.system(command2)
         print("Recording the dance!")
 
 
@@ -459,7 +462,7 @@ def exit(event):
 
 
 if __name__ == '__main__':
-    serial_port = '/dev/ttyS0'  # This is the default UART port on Raspberry Pi 4B
+    '''serial_port = '/dev/ttyS0'  # This is the default UART port on Raspberry Pi 4B
     baud_rate = 9600  # Should match the baud rate configured on the STM32
 
     ser = serial.Serial(serial_port, baud_rate)
@@ -477,7 +480,7 @@ if __name__ == '__main__':
     finally:
         if ser.is_open:
             ser.close()
-            print("Serial port closed.") 
+            print("Serial port closed.") '''
     
     root = tkinter.Tk()
     w = FullscreenWindow()
