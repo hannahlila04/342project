@@ -480,6 +480,20 @@ def exit(event):
 
 # root.mainloop()
 
+def read_from_serial():
+    global human_is_present
+    if ser.in_waiting > 0:
+        received_data = ser.read().decode('latin-1')  # Decode the incoming bytes
+        # Process the received data to update human_is_present
+        human_is_present = not human_is_present  # This is just a placeholder for your actual logic
+        
+        if human_is_present:
+            make_text_visible()
+        else:
+            make_text_invisible()
+
+            # Schedule this function to be called again after 100 milliseconds
+    root.after(100, read_from_serial)
 
 
 
@@ -492,7 +506,7 @@ if __name__ == '__main__':
     # ser = serial.Serial(serial_port, baud_rate, timeout=timeout)
     ser = serial.Serial(serial_port, baud_rate)
 
-    received_data = b''  # Initialize received_data before the loop
+    # received_data = b''  # Initialize received_data before the loop
 
     human_is_present = False  # Initialize the flag to False
 
@@ -500,76 +514,83 @@ if __name__ == '__main__':
     root = tkinter.Tk()
    
     w = FullscreenWindow()
+
+    root.after(100, read_from_serial)
+
     # make_text_invisible()
 
 
 
     w.tk.mainloop()
 
-    try:
-        i = 0
+    if ser.is_open:
+        ser.close()
+        print("Serial port closed.") 
 
-        print("Human is Present", human_is_present, i)
-        if not ser.is_open:
-            ser.open()
-        print("Serial port opened successfully.")
+    # try:
+    #     i = 0
+
+    #     print("Human is Present", human_is_present, i)
+    #     if not ser.is_open:
+    #         ser.open()
+    #     print("Serial port opened successfully.")
        
 
-        while True:
-            if ser.in_waiting > 0:
-                i += 1
-                human_is_present = not human_is_present
-                # # received_data = ser.readline().decode().strip()  # Read and decode the received data
-                # # received_data = ser.readline().decode()
-                received_data = ser.read().decode('latin-1')  # Decode the incoming bytes as ASCII string
-                # if received_data == '':
-                #     human_is_present = False  # Initialize the flag to False
-                # else:
-                #     human_is_present = True
-                # # received_data = "p 100 " +  str(i) # test value
-                # print(len(ser.in_waiting()))
+    #     while True:
+    #         if ser.in_waiting > 0:
+    #             i += 1
+    #             human_is_present = not human_is_present
+    #             # # received_data = ser.readline().decode().strip()  # Read and decode the received data
+    #             # # received_data = ser.readline().decode()
+    #             received_data = ser.read().decode('latin-1')  # Decode the incoming bytes as ASCII string
+    #             # if received_data == '':
+    #             #     human_is_present = False  # Initialize the flag to False
+    #             # else:
+    #             #     human_is_present = True
+    #             # # received_data = "p 100 " +  str(i) # test value
+    #             # print(len(ser.in_waiting()))
 
 
-                # Parse the received data
-                # if received_data.startswith('p') and received_data.count(' ') == 1:
-                # if received_data.startswith(b'p') and received_data.count(b' ') == 1:
-                #     try:
-                #         p_val, i_val = map(int, received_data[1:].split(' '))
-                #         print("Parsed values: p={}, i={}".format(p_val, i_val))
+    #             # Parse the received data
+    #             # if received_data.startswith('p') and received_data.count(' ') == 1:
+    #             # if received_data.startswith(b'p') and received_data.count(b' ') == 1:
+    #             #     try:
+    #             #         p_val, i_val = map(int, received_data[1:].split(' '))
+    #             #         print("Parsed values: p={}, i={}".format(p_val, i_val))
 
-                #     # Set flags based on sensor readings
-                #         if p_val > 0:
-                #                 flag_p = True
-                #         else:
-                #             flag_p = False
+    #             #     # Set flags based on sensor readings
+    #             #         if p_val > 0:
+    #             #                 flag_p = True
+    #             #         else:
+    #             #             flag_p = False
 
-                #         if i_val > 0:
-                #             flag_i = True
-                #         else:
-                #             flag_i = False
+    #             #         if i_val > 0:
+    #             #             flag_i = True
+    #             #         else:
+    #             #             flag_i = False
 
-                #         # Do something with the flags
-                #         print("Flag P:", flag_p)
-                #         print("Flag I:", flag_i)
+    #             #         # Do something with the flags
+    #             #         print("Flag P:", flag_p)
+    #             #         print("Flag I:", flag_i)
 
-                #     except ValueError:
-                #         print("Invalid sensor values.")
-            # else:
-            #     human_is_present = False  # Initialize the flag to False
+    #             #     except ValueError:
+    #             #         print("Invalid sensor values.")
+    #         # else:
+    #         #     human_is_present = False  # Initialize the flag to False
 
-            # print("Human is present:", human_is_present, i)            
-            if human_is_present:
-                # print("Human is present:", human_is_present, i)
-                make_text_visible()
-            else:
-                # print("Human is not present:", human_is_present, i)
-                make_text_invisible()
+    #         # print("Human is present:", human_is_present, i)            
+    #         if human_is_present:
+    #             # print("Human is present:", human_is_present, i)
+    #             make_text_visible()
+    #         else:
+    #             # print("Human is not present:", human_is_present, i)
+    #             make_text_invisible()
 
 
 
-    finally:
-        if ser.is_open:
-            ser.close()
-            print("Serial port closed.") 
+    # finally:
+    #     if ser.is_open:
+    #         ser.close()
+    #         print("Serial port closed.") 
 
 
