@@ -456,8 +456,8 @@ def exit(event):
 
 if __name__ == '__main__':
     serial_port = '/dev/ttyS0'  # This is the default UART port on Raspberry Pi 4B
-    # baud_rate = 9600  # Should match the baud rate configured on the STM32
-    baud_rate = 115200  # Should match the baud rate configured on the STM32
+    baud_rate = 9600  # Should match the baud rate configured on the STM32
+    # baud_rate = 115200  # Should match the baud rate configured on the STM32
 
     ser = serial.Serial(serial_port, baud_rate)
 
