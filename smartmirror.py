@@ -397,10 +397,7 @@ class FullscreenWindow:
         self.topFrame.pack(side = TOP, fill=BOTH, expand = YES)
         self.bottomFrame.pack(side = BOTTOM, fill=BOTH, expand = YES)
         self.state = False
-        # self.tk.attributes("-fullscreen", True)  # Start in fullscreen mode
-        def set_fullscreen():
-            self.tk.attributes('-fullscreen', True)
-        root.after(100, set_fullscreen)  # Set full-screen after 100ms
+        self.tk.attributes("-fullscreen", True)  # Start in fullscreen mode
         self.tk.bind("<Return>", self.toggle_fullscreen)
         self.tk.bind("<Escape>", self.end_fullscreen)
         # clock
