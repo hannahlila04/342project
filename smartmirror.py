@@ -170,7 +170,7 @@ class Reminders(Frame):
 
         # self.after(600000, self.get_reminders)  # Refresh every 10 minutes
         self.after(600, self.get_reminders)  # Refresh every 10 minutes
-        print("Refreshed reminders")
+        # print("Refreshed reminders")
 
 class Reminder(Frame):
     def __init__(self, parent, reminder_text=""):
