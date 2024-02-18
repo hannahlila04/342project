@@ -470,10 +470,39 @@ if __name__ == '__main__':
                 received_data = ser.readline().decode().strip()  # Read and decode the received data
                 print("Received data:", received_data)
 
+            # Parse the received data
+            if received_data.startswith('p') and received_data.count(' ') == 1:
+                try:
+                    p_val, i_val = map(int, received_data[1:].split(' '))
+                    print("Parsed values: p={}, i={}".format(p_val, i_val))
+
+                # Set flags based on sensor readings
+                    if p_val > 0:
+                            flag_p = True
+                    else:
+                        flag_p = False
+
+                    if i_val > 0:
+                        flag_i = True
+                    else:
+                        flag_i = False
+
+                    # Do something with the flags
+                    print("Flag P:", flag_p)
+                    print("Flag I:", flag_i)
+
+                except ValueError:
+                    print("Invalid sensor values.")
+
+            
+
+
     finally:
         if ser.is_open:
             ser.close()
             print("Serial port closed.") 
+
+
 
     root = tkinter.Tk()
     w = FullscreenWindow()
