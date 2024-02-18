@@ -477,13 +477,14 @@ if __name__ == '__main__':
         while True:
             if ser.in_waiting > 0:
                 i += 1
+                human_is_present = not human_is_present
                 # # received_data = ser.readline().decode().strip()  # Read and decode the received data
                 # # received_data = ser.readline().decode()
                 received_data = ser.read().decode('latin-1')  # Decode the incoming bytes as ASCII string
-                if received_data == '':
-                    human_is_present = False  # Initialize the flag to False
-                else:
-                    human_is_present = True
+                # if received_data == '':
+                #     human_is_present = False  # Initialize the flag to False
+                # else:
+                #     human_is_present = True
                 # # received_data = "p 100 " +  str(i) # test value
                 print("Received data with i " + str(i) + " rd " + str(received_data) + " hip " + str(human_is_present))
                 # print(len(ser.in_waiting()))
