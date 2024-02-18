@@ -233,7 +233,7 @@ class Clock(Frame):
         print("Recording the dance!")
 
         # record()
-        command = f" ssh anooprehman@100.66.88.216 '/Library/Frameworks/Python.framework/Versions/3.9/bin/python3.9 /Users/anooprehman/Documents/uoft/extracurricular/hackathons/makeuoft/342project/camera_stuff.py'"
+        command = f" ssh anooprehman@172.20.10.3 '/Library/Frameworks/Python.framework/Versions/3.9/bin/python3.9 /Users/anooprehman/Documents/uoft/extracurricular/hackathons/makeuoft/342project/camera_stuff.py'"
         
         os.system(command)
         print("ran the ssh command!")
