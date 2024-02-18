@@ -169,6 +169,11 @@ class Clock(Frame):
         self.date1 = ''
         self.dateLbl = Label(self, text=self.date1, font=('Helvetica', small_text_size), fg="white", bg="black")
         self.dateLbl.pack(side=TOP, anchor=E)
+
+       # Add a button for recording dance
+        self.recordButton = Button(self, text="Record my dance!!!", command=self.record_dance, font=('Helvetica', small_text_size), fg="white", bg="black")
+        self.recordButton.pack(side=TOP, anchor=E, pady=10)  # Add some padding to separate from the date
+
         self.tick()
 
     def tick(self):
@@ -194,6 +199,10 @@ class Clock(Frame):
             # to update the time display as needed
             # could use >200 ms, but display gets jerky
             self.timeLbl.after(200, self.tick)
+
+    def record_dance(self):
+        # Placeholder for the actual recording functionality
+        print("Recording the dance!")
 
 
 class Weather(Frame):
