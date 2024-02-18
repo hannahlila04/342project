@@ -470,7 +470,8 @@ if __name__ == '__main__':
 
         while True:
 
-            if ser.in_waiting > 0:
+            # if ser.in_waiting > 0:
+            if True:
                 i = 0
                 if True:
                     received_data = ser.readline().decode().strip()  # Read and decode the received data
