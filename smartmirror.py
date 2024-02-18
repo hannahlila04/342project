@@ -132,7 +132,7 @@ class Reminders(Frame):
                 creds.refresh(Request())
             else:
                 flow = InstalledAppFlow.from_client_secrets_file(
-                    'credentials.json', SCOPES)
+                    '/Users/anooprehman/Documents/uoft/extracurricular/hackathons/makeuoft/342project/credentials.json', SCOPES)
                 creds = flow.run_local_server(port=0)
             # Save the credentials for the next run
             with open('token.json', 'w') as token:
