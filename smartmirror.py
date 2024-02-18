@@ -471,10 +471,11 @@ if __name__ == '__main__':
             ser.open()
         print("Serial port opened successfully.")
        
-        # i = 0
+        i = 0
 
         while True:
             if ser.in_waiting > 0:
+                i += 1
                 # # received_data = ser.readline().decode().strip()  # Read and decode the received data
                 # # received_data = ser.readline().decode()
                 received_data = ser.read().decode('latin-1')  # Decode the incoming bytes as ASCII string
@@ -483,8 +484,7 @@ if __name__ == '__main__':
                 else:
                     human_is_present = True
                 # # received_data = "p 100 " +  str(i) # test value
-                print("Received data:", received_data)
-                # # i += 1
+                print("Received data:" + str(received_data) + " " + str(i))
                 # print(len(ser.in_waiting()))
 
 
