@@ -76,13 +76,16 @@ icon_lookup = {
 
 class Reminders(Frame):
     def __init__(self, parent, *args, **kwargs):
-        Frame.__init__(self, parent, *args, **kwargs)
+        # Frame.__init__(self, parent, *args, **kwargs)
+        super().__init__(parent, *args, **kwargs)
         self.config(bg='black')
         self.title = 'Reminders'
         self.remindersLbl = Label(self, text=self.title, font=('Helvetica', medium_text_size), fg="white", bg="black")
         self.remindersLbl.pack(side=TOP, anchor=W)
         self.remindersContainer = Frame(self, bg="black")
         self.remindersContainer.pack(side=TOP)
+        self.reminderWidgets = []  # Keep track of reminder widgets
+        self.reminderTitles = []  # New list to keep track of the titles
         self.get_reminders()
 
     def get_reminders(self):
@@ -108,21 +111,34 @@ class Reminders(Frame):
 
         service = build('tasks', 'v1', credentials=creds)
 
-        # Clear existing reminders from the display
-        for widget in self.remindersContainer.winfo_children():
-            widget.destroy()
+        # # Clear existing reminders from the display
+        # for widget in self.remindersContainer.winfo_children():
+        #     widget.destroy()
 
         # Call the Tasks API
         results = service.tasks().list(tasklist='@default', maxResults=2).execute()
         items = results.get('items', [])
 
-        if not items:
-            # print('No upcoming reminders found.')
-            pass
-        else:
-            for item in items:
-                reminder = Reminder(self.remindersContainer, item['title'])
+        new_titles = [item['title'] for item in items]  # Extract titles from fetched items
+
+        # Update or create widgets based on new titles
+        for i, title in enumerate(new_titles):
+            if i < len(self.reminderWidgets):
+                if self.reminderTitles[i] != title:
+                    # Update widget text only if it has changed
+                    self.reminderWidgets[i].config(text=title)
+                    self.reminderTitles[i] = title  # Update the title being displayed
+            else:
+                # Create new reminder widget if more titles than widgets
+                reminder = Label(self.remindersContainer, text=title, font=('Helvetica', small_text_size), fg="white", bg="black")
                 reminder.pack(side=TOP, anchor=W)
+                self.reminderWidgets.append(reminder)  # Add widget to the list
+                self.reminderTitles.append(title)  # Add title to the list
+
+        # Hide any excess widgets if there are fewer new titles than widgets
+        for j in range(len(new_titles), len(self.reminderWidgets)):
+            self.reminderWidgets[j].pack_forget()
+            self.reminderTitles[j] = ""  # Clear the title for hidden widgets
 
         # self.after(600000, self.get_reminders)  # Refresh every 10 minutes
         self.after(600, self.get_reminders)  # Refresh every 10 minutes
