@@ -11,7 +11,7 @@ from datetime import datetime
 # If modifying these SCOPES, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/drive.file']
 
-def main():
+def upload_video():
     current_time = datetime.now()
     time_str = current_time.strftime('%Y-%m-%d_%H-%M-%S')
     unique_filename = f"dance_recording_{time_str}.mp4"
@@ -47,4 +47,4 @@ def main():
     print('File ID: %s' % file.get('id'))
 
 if __name__ == '__main__':
-    main()
+    upload_video()
