@@ -458,8 +458,9 @@ if __name__ == '__main__':
     serial_port = '/dev/ttyS0'  # This is the default UART port on Raspberry Pi 4B
     # baud_rate = 9600  # Should match the baud rate configured on the STM32
     baud_rate = 115200  # Should match the baud rate configured on the STM32
+    timeout = 1  # Timeout for serial communication
 
-    ser = serial.Serial(serial_port, baud_rate)
+    ser = serial.Serial(serial_port, baud_rate, timeout=timeout)
 
     received_data = b''  # Initialize received_data before the loop
 
@@ -476,12 +477,15 @@ if __name__ == '__main__':
             if ser.in_waiting > 0:
                 # # received_data = ser.readline().decode().strip()  # Read and decode the received data
                 # # received_data = ser.readline().decode()
-                # received_data = ser.read().decode('latin-1')  # Decode the incoming bytes as ASCII string
+                received_data = ser.read().decode('latin-1')  # Decode the incoming bytes as ASCII string
+                if received_data == '':
+                    human_is_present = False  # Initialize the flag to False
+                else:
+                    human_is_present = True
                 # # received_data = "p 100 " +  str(i) # test value
                 # print("Received data:", received_data)
                 # # i += 1
-
-                human_is_present = True  # Initialize the flag to False
+                # print(len(ser.in_waiting()))
 
 
                 # Parse the received data
