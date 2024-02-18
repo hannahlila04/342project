@@ -22,6 +22,10 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 import os.path
 
+import cv2
+from datetime import datetime
+from googleapiclient.http import MediaFileUpload
+
 LOCALE_LOCK = threading.Lock()
 
 ui_locale = '' # e.g. 'fr_FR' fro French, '' as default
@@ -90,7 +94,7 @@ class Reminders(Frame):
 
     def get_reminders(self):
         # Authentication and building the service
-        SCOPES = ['https://www.googleapis.com/auth/tasks.readonly']
+        SCOPES = ['https://www.googleapis.com/auth/tasks.readonly', 'https://www.googleapis.com/auth/drive.file']
         creds = None
         # The file token.json stores the user's access and refresh tokens, and is
         # created automatically when the authorization flow completes for the first
