@@ -81,6 +81,7 @@ icon_lookup = {
 
 # Function to make text invisible for supported widgets
 def make_text_invisible():
+    print("Making text invisible!!!!")
     for widget in root.winfo_children():
         # Apply only to widgets that support text or foreground color change
         if isinstance(widget, (Label, Button, Entry)):
@@ -498,6 +499,7 @@ if __name__ == '__main__':
    
     w = FullscreenWindow()
     make_text_invisible()
+
 
 
     w.tk.mainloop()
