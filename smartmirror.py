@@ -77,6 +77,22 @@ icon_lookup = {
 }
 
 
+def make_text_invisible():
+    # Loop through all widgets in the root window
+    for widget in root.winfo_children():
+        # Check if the widget is a label
+        if isinstance(widget, Label):
+            # Set the label's state to 'hidden'
+            widget.config(state='hidden')
+
+def make_text_visible():
+    # Loop through all widgets in the root window
+    for widget in root.winfo_children():
+        # Check if the widget is a label
+        if isinstance(widget, Label):
+            # Set the label's state to 'normal'
+            widget.config(state='normal')
+
 class Reminders(Frame):
     def __init__(self, parent, *args, **kwargs):
         # Frame.__init__(self, parent, *args, **kwargs)
@@ -206,6 +222,7 @@ class Clock(Frame):
     def record_dance(self):
         # Placeholder for the actual recording functionality
         print("Recording the dance!")
+        make_text_invisible()
 
 
 class Weather(Frame):
