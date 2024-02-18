@@ -479,6 +479,7 @@ if __name__ == '__main__':
                 print("Received data:", received_data)
                 # i += 1
 
+
             # Parse the received data
             # if received_data.startswith('p') and received_data.count(' ') == 1:
             if received_data.startswith(b'p') and received_data.count(b' ') == 1:
