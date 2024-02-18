@@ -483,7 +483,7 @@ if __name__ == '__main__':
                 else:
                     human_is_present = True
                 # # received_data = "p 100 " +  str(i) # test value
-                # print("Received data:", received_data)
+                print("Received data:", received_data)
                 # # i += 1
                 # print(len(ser.in_waiting()))
 
