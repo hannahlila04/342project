@@ -465,7 +465,7 @@ if __name__ == '__main__':
 
     received_data = b''  # Initialize received_data before the loop
 
-    human_is_present = True  # Initialize the flag to False
+    human_is_present = False  # Initialize the flag to False
 
     try:
         if not ser.is_open:
