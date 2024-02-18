@@ -14,6 +14,12 @@ import feedparser
 from PIL import Image, ImageTk
 from contextlib import contextmanager
 
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+import os.path
+
 LOCALE_LOCK = threading.Lock()
 
 ui_locale = '' # e.g. 'fr_FR' fro French, '' as default
@@ -57,6 +63,64 @@ icon_lookup = {
     'tornado': "assests/Tornado.png",    # tornado
     'hail': "assests/Hail.png"  # hail
 }
+
+
+class Reminders(Frame):
+    def __init__(self, parent, *args, **kwargs):
+        Frame.__init__(self, parent, *args, **kwargs)
+        self.config(bg='black')
+        self.title = 'Reminders'
+        self.remindersLbl = Label(self, text=self.title, font=('Helvetica', medium_text_size), fg="white", bg="black")
+        self.remindersLbl.pack(side=TOP, anchor=W)
+        self.remindersContainer = Frame(self, bg="black")
+        self.remindersContainer.pack(side=TOP)
+        self.get_reminders()
+
+    def get_reminders(self):
+        # Authentication and building the service
+        SCOPES = ['https://www.googleapis.com/auth/tasks.readonly']
+        creds = None
+        # The file token.json stores the user's access and refresh tokens, and is
+        # created automatically when the authorization flow completes for the first
+        # time.
+        if os.path.exists('token.json'):
+            creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+        # If there are no (valid) credentials available, let the user log in.
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    'credentials.json', SCOPES)
+                creds = flow.run_local_server(port=0)
+            # Save the credentials for the next run
+            with open('token.json', 'w') as token:
+                token.write(creds.to_json())
+
+        service = build('tasks', 'v1', credentials=creds)
+
+        # Call the Tasks API
+        results = service.tasks().list(tasklist='@default', maxResults=2).execute()
+        items = results.get('items', [])
+
+        if not items:
+            print('No upcoming reminders found.')
+        else:
+            for item in items:
+                reminder = Reminder(self.remindersContainer, item['title'])
+                reminder.pack(side=TOP, anchor=W)
+
+        # self.after(600000, self.get_reminders)  # Refresh every 10 minutes
+        self.after(6000, self.get_reminders)  # Refresh every 10 minutes
+
+class Reminder(Frame):
+    def __init__(self, parent, reminder_text=""):
+        Frame.__init__(self, parent, bg='black')
+        self.reminderText = reminder_text
+        self.reminderLbl = Label(self, text=self.reminderText, font=('Helvetica', small_text_size), fg="white", bg="black")
+        self.reminderLbl.pack(side=LEFT, anchor=N)
+
+
 
 
 class Clock(Frame):
@@ -310,8 +374,14 @@ class FullscreenWindow:
         self.weather = Weather(self.topFrame)
         self.weather.pack(side=LEFT, anchor=N, padx=100, pady=60)
         # news
-        self.news = News(self.bottomFrame)
-        self.news.pack(side=LEFT, anchor=S, padx=100, pady=60)
+        # UNCOMMENTING!!
+        # self.news = News(self.bottomFrame)
+        # self.news.pack(side=LEFT, anchor=S, padx=100, pady=60)
+
+
+        self.reminders = Reminders(self.bottomFrame)
+        self.reminders.pack(side=LEFT, anchor=S, padx=100, pady=60)
+
         # calender - removing for now
         # self.calender = Calendar(self.bottomFrame)
         # self.calender.pack(side = RIGHT, anchor=S, padx=100, pady=60)
