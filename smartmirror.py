@@ -487,6 +487,9 @@ if __name__ == '__main__':
 
     root = tkinter.Tk()
     w = FullscreenWindow()
+    make_text_invisible()
+
+
     w.tk.mainloop()
 
     try:
