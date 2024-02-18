@@ -77,21 +77,18 @@ icon_lookup = {
 }
 
 
+# Function to make all text invisible
 def make_text_invisible():
-    # Loop through all widgets in the root window
+    # Loop through all widgets and make their text color same as background color
     for widget in root.winfo_children():
-        # Check if the widget is a label
-        if isinstance(widget, Label):
-            # Set the label's state to 'hidden'
-            widget.config(state='hidden')
+        widget.config(fg="black")  # Change the text color to black
 
+# Function to make all text visible
 def make_text_visible():
-    # Loop through all widgets in the root window
+    # Loop through all widgets and make their text color white
     for widget in root.winfo_children():
-        # Check if the widget is a label
-        if isinstance(widget, Label):
-            # Set the label's state to 'normal'
-            widget.config(state='normal')
+        widget.config(fg="white")  # Change the text color to white
+
 
 class Reminders(Frame):
     def __init__(self, parent, *args, **kwargs):
@@ -439,6 +436,9 @@ class FullscreenWindow:
         # UNCOMMENTING!!
         # self.news = News(self.bottomFrame)
         # self.news.pack(side=LEFT, anchor=S, padx=100, pady=60)
+
+        # Call the function to make text invisible
+        make_text_invisible()
 
 
         self.reminders = Reminders(self.bottomFrame)
