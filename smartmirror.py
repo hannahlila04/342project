@@ -81,13 +81,13 @@ icon_lookup = {
 def make_text_invisible():
     # Loop through all widgets and make their text color same as background color
     for widget in root.winfo_children():
-        widget.config(fg="black")  # Change the text color to black
+        widget.config(foreground="black")  # Change the text color to black
 
 # Function to make all text visible
 def make_text_visible():
     # Loop through all widgets and make their text color white
     for widget in root.winfo_children():
-        widget.config(fg="white")  # Change the text color to white
+        widget.config(foreground="white")  # Change the text color to white
 
 
 class Reminders(Frame):
