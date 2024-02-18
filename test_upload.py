@@ -4,11 +4,19 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 import os.path
+from datetime import datetime
+
+
 
 # If modifying these SCOPES, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/drive.file']
 
 def main():
+    current_time = datetime.now()
+    time_str = current_time.strftime('%Y-%m-%d_%H-%M-%S')
+    unique_filename = f"dance_recording_{time_str}.mp4"
+
+
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
@@ -30,8 +38,8 @@ def main():
     service = build('drive', 'v3', credentials=creds)
 
     # Call the Drive v3 API
-    file_metadata = {'name': 'vid1.mp4'}
-    media = MediaFileUpload('output.mp4',
+    file_metadata = {'name': unique_filename}
+    media = MediaFileUpload(unique_filename + '.mp4',
                             mimetype='video/mp4')
     file = service.files().create(body=file_metadata,
                                   media_body=media,

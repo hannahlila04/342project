@@ -1,6 +1,10 @@
 import cv2
+from datetime import datetime
+
 
 def record_video(output_file='output.mp4', frames_per_second=20.0, resolution=(640, 480), record_time=3):
+
+
     # Define the codec and create VideoWriter object
     # fourcc = cv2.VideoWriter_fourcc(*'XVID')
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
@@ -39,4 +43,8 @@ def record_video(output_file='output.mp4', frames_per_second=20.0, resolution=(6
     cv2.destroyAllWindows()
 
 # Record a 10-second video
-record_video()
+current_time = datetime.now()
+time_str = current_time.strftime('%Y-%m-%d_%H-%M-%S')
+unique_filename = f"dance_recording_{time_str}.mp4"
+
+record_video(output_file=unique_filename, record_time=3)
