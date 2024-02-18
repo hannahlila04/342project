@@ -474,7 +474,7 @@ if __name__ == '__main__':
             if ser.in_waiting > 0:
                 # received_data = ser.readline().decode().strip()  # Read and decode the received data
                 # received_data = ser.readline().decode()
-                received_data = ser.read().decode('latin-1')  # Decode the incoming bytes as ASCII string
+                received_data = ser.read().decode('utf-8', errors='ignore')  # Decode the incoming bytes as ASCII string
                 # received_data = "p 100 " +  str(i) # test value
                 print("Received data:", received_data)
                 # i += 1
@@ -482,7 +482,7 @@ if __name__ == '__main__':
 
                 # Parse the received data
                 # if received_data.startswith('p') and received_data.count(' ') == 1:
-                if received_data.startswith(b'p') and received_data.count(b' ') == 1:
+                if received_data.startswith('p') and received_data.count(' ') == 1:
                     try:
                         p_val, i_val = map(int, received_data[1:].split(' '))
                         print("Parsed values: p={}, i={}".format(p_val, i_val))
