@@ -467,6 +467,11 @@ if __name__ == '__main__':
 
     human_is_present = False  # Initialize the flag to False
 
+
+    root = tkinter.Tk()
+    w = FullscreenWindow()
+    w.tk.mainloop()
+
     try:
         if not ser.is_open:
             ser.open()
@@ -526,7 +531,3 @@ if __name__ == '__main__':
             print("Serial port closed.") 
 
 
-
-    root = tkinter.Tk()
-    w = FullscreenWindow()
-    w.tk.mainloop()
