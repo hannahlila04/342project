@@ -108,7 +108,8 @@ class Reminders(Frame):
         items = results.get('items', [])
 
         if not items:
-            print('No upcoming reminders found.')
+            # print('No upcoming reminders found.')
+            pass
         else:
             for item in items:
                 reminder = Reminder(self.remindersContainer, item['title'])
