@@ -206,7 +206,9 @@ class Clock(Frame):
 
     def record_dance(self):
         # Placeholder for the actual recording functionality
-        record()
+        # record()
+        command = f"ssh hannahlila04@100.67.24.1 'python3.9 /path/to/camera_stuff.py'"
+        os.system(command)
         print("Recording the dance!")
 
 
