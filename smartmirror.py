@@ -2,7 +2,7 @@
 # requirements
 # requests, feedparser, traceback, Pillow
 
-from Tkinter import *
+from tkinter import *
 import locale
 import threading
 import time
@@ -20,6 +20,7 @@ ui_locale = '' # e.g. 'fr_FR' fro French, '' as default
 time_format = 12 # 12 or 24
 date_format = "%b %d, %Y" # check python doc for strftime() for options
 news_country_code = 'us'
+# weather_api_token = '<TOKEN>' # create account at https://darksky.net/dev/
 weather_api_token = '<TOKEN>' # create account at https://darksky.net/dev/
 weather_lang = 'en' # see https://darksky.net/dev/docs/forecast for full list of language parameters values
 weather_unit = 'us' # see https://darksky.net/dev/docs/forecast for full list of unit parameters values
@@ -130,7 +131,7 @@ class Weather(Frame):
             return ip_json['ip']
         except Exception as e:
             traceback.print_exc()
-            return "Error: %s. Cannot get ip." % e
+            return ("Error: %s. Cannot get ip." % e)
 
     def get_weather(self):
         try:
@@ -199,7 +200,7 @@ class Weather(Frame):
                     self.locationLbl.config(text=location2)
         except Exception as e:
             traceback.print_exc()
-            print "Error: %s. Cannot get weather." % e
+            print ("Error: %s. Cannot get weather." % e)
 
         self.after(600000, self.get_weather)
 
@@ -236,7 +237,7 @@ class News(Frame):
                 headline.pack(side=TOP, anchor=W)
         except Exception as e:
             traceback.print_exc()
-            print "Error: %s. Cannot get news." % e
+            print("Error: %s. Cannot get news." % e)
 
         self.after(600000, self.get_headlines)
 
