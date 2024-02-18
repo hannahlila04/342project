@@ -461,7 +461,7 @@ if __name__ == '__main__':
 
     ser = serial.Serial(serial_port, baud_rate)
 
-    received_data = ''  # Initialize received_data before the loop
+    received_data = b''  # Initialize received_data before the loop
 
     try:
         if not ser.is_open:
