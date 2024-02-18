@@ -512,8 +512,8 @@ if __name__ == '__main__':
 
                 #     except ValueError:
                 #         print("Invalid sensor values.")
-            else:
-                human_is_present = False  # Initialize the flag to False
+            # else:
+            #     human_is_present = False  # Initialize the flag to False
 
             print("Human is present:", human_is_present)            
 
