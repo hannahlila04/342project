@@ -450,7 +450,7 @@ class FullscreenWindow:
         # self.news.pack(side=LEFT, anchor=S, padx=100, pady=60)
 
         # Call the function to make text invisible
-        make_text_invisible()
+        # make_text_invisible()
 
 
         self.reminders = Reminders(self.bottomFrame)
@@ -500,7 +500,7 @@ if __name__ == '__main__':
     root = tkinter.Tk()
    
     w = FullscreenWindow()
-    make_text_invisible()
+    # make_text_invisible()
 
 
 
