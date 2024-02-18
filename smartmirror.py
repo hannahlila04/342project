@@ -35,7 +35,8 @@ longitude = None # Set this if IP location lookup does not work for you (must be
 xlarge_text_size = 94
 large_text_size = 48
 medium_text_size = 28
-small_text_size = 18
+# small_text_size = 18
+small_text_size = 12
 
 @contextmanager
 def setlocale(name): #thread proof function to work with locale
