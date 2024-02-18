@@ -495,13 +495,7 @@ if __name__ == '__main__':
 
 
     root = tkinter.Tk()
-        # Create style for visible text
-    root.style_visible = ttk.Style()
-    root.style_visible.configure('Visible.TLabel', foreground='white')
-
-    # Create style for invisible text
-    root.style_invisible = ttk.Style()
-    root.style_invisible.configure('Invisible.TLabel', foreground='black')
+   
     w = FullscreenWindow()
     make_text_invisible()
 
