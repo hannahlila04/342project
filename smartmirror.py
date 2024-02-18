@@ -525,7 +525,6 @@ if __name__ == '__main__':
                 # else:
                 #     human_is_present = True
                 # # received_data = "p 100 " +  str(i) # test value
-                print("Received data with i " + str(i) + " rd " + str(received_data) + " hip " + str(human_is_present))
                 # print(len(ser.in_waiting()))
 
 
@@ -563,6 +562,9 @@ if __name__ == '__main__':
             else:
                 # print("Human is not present:", human_is_present, i)
                 make_text_invisible()
+
+        print("Received data with i " + str(i) + " rd " + str(received_data) + " hip " + str(human_is_present))
+
 
     finally:
         if ser.is_open:
