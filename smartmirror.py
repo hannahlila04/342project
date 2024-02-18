@@ -22,6 +22,9 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 import os.path
 
+import serial
+
+
 LOCALE_LOCK = threading.Lock()
 
 ui_locale = '' # e.g. 'fr_FR' fro French, '' as default
@@ -452,6 +455,26 @@ def exit(event):
 
 
 if __name__ == '__main__':
+    serial_port = '/dev/ttyS0'  # This is the default UART port on Raspberry Pi 4B
+    baud_rate = 9600  # Should match the baud rate configured on the STM32
+
+    ser = serial.Serial(serial_port, baud_rate)
+
+    try:
+        if not ser.is_open:
+            ser.open()
+        print("Serial port opened successfully.")
+
+        while True:
+            if ser.in_waiting > 0:
+                received_data = ser.readline().decode().strip()  # Read and decode the received data
+                print("Received data:", received_data)
+
+    finally:
+        if ser.is_open:
+            ser.close()
+            print("Serial port closed.") 
+
     root = tkinter.Tk()
     w = FullscreenWindow()
     w.tk.mainloop()
