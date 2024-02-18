@@ -515,7 +515,7 @@ if __name__ == '__main__':
             # else:
             #     human_is_present = False  # Initialize the flag to False
 
-            print("Human is present:", human_is_present)            
+            print("Human is present:", human_is_present, i)            
 
 
     finally:
