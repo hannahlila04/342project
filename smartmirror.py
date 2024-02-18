@@ -27,6 +27,7 @@ import os.path
 import serial
 
 
+
 LOCALE_LOCK = threading.Lock()
 
 ui_locale = '' # e.g. 'fr_FR' fro French, '' as default
