@@ -99,6 +99,10 @@ class Reminders(Frame):
 
         service = build('tasks', 'v1', credentials=creds)
 
+        # Clear existing reminders from the display
+        for widget in self.remindersContainer.winfo_children():
+            widget.destroy()
+
         # Call the Tasks API
         results = service.tasks().list(tasklist='@default', maxResults=2).execute()
         items = results.get('items', [])
@@ -111,7 +115,7 @@ class Reminders(Frame):
                 reminder.pack(side=TOP, anchor=W)
 
         # self.after(600000, self.get_reminders)  # Refresh every 10 minutes
-        self.after(6000, self.get_reminders)  # Refresh every 10 minutes
+        self.after(600, self.get_reminders)  # Refresh every 10 minutes
 
 class Reminder(Frame):
     def __init__(self, parent, reminder_text=""):
