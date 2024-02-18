@@ -485,7 +485,7 @@ if __name__ == '__main__':
                 else:
                     human_is_present = True
                 # # received_data = "p 100 " +  str(i) # test value
-                print("Received data:" + str(received_data) + " " + str(i))
+                print("Received data with i " + str(i) + "rd " + str(received_data) + "hip " + str(human_is_present))
                 # print(len(ser.in_waiting()))
 
 
@@ -516,7 +516,7 @@ if __name__ == '__main__':
             # else:
             #     human_is_present = False  # Initialize the flag to False
 
-            print("Human is present:", human_is_present, i)            
+            # print("Human is present:", human_is_present, i)            
 
 
     finally:
