@@ -461,7 +461,7 @@ if __name__ == '__main__':
 
     ser = serial.Serial(serial_port, baud_rate)
 
-    received_data = b''  # Initialize received_data before the loop
+    received_data = ''  # Initialize received_data before the loop
 
     try:
         if not ser.is_open:
@@ -474,36 +474,36 @@ if __name__ == '__main__':
             if ser.in_waiting > 0:
                 # received_data = ser.readline().decode().strip()  # Read and decode the received data
                 # received_data = ser.readline().decode()
-                received_data = ser.read()
+                received_data = ser.read().decode('ascii')  # Decode the incoming bytes as ASCII string
                 # received_data = "p 100 " +  str(i) # test value
                 print("Received data:", received_data)
                 # i += 1
 
 
-            # Parse the received data
-            # if received_data.startswith('p') and received_data.count(' ') == 1:
-            if received_data.startswith(b'p') and received_data.count(b' ') == 1:
-                try:
-                    p_val, i_val = map(int, received_data[1:].split(' '))
-                    print("Parsed values: p={}, i={}".format(p_val, i_val))
+                # Parse the received data
+                # if received_data.startswith('p') and received_data.count(' ') == 1:
+                if received_data.startswith(b'p') and received_data.count(b' ') == 1:
+                    try:
+                        p_val, i_val = map(int, received_data[1:].split(' '))
+                        print("Parsed values: p={}, i={}".format(p_val, i_val))
 
-                # Set flags based on sensor readings
-                    if p_val > 0:
-                            flag_p = True
-                    else:
-                        flag_p = False
+                    # Set flags based on sensor readings
+                        if p_val > 0:
+                                flag_p = True
+                        else:
+                            flag_p = False
 
-                    if i_val > 0:
-                        flag_i = True
-                    else:
-                        flag_i = False
+                        if i_val > 0:
+                            flag_i = True
+                        else:
+                            flag_i = False
 
-                    # Do something with the flags
-                    print("Flag P:", flag_p)
-                    print("Flag I:", flag_i)
+                        # Do something with the flags
+                        print("Flag P:", flag_p)
+                        print("Flag I:", flag_i)
 
-                except ValueError:
-                    print("Invalid sensor values.")
+                    except ValueError:
+                        print("Invalid sensor values.")
 
             
 
