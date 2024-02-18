@@ -507,11 +507,13 @@ if __name__ == '__main__':
     w.tk.mainloop()
 
     try:
+        i = 0
+
+        print("Human is Present", human_is_present, i)
         if not ser.is_open:
             ser.open()
         print("Serial port opened successfully.")
        
-        i = 0
 
         while True:
             if ser.in_waiting > 0:
@@ -563,7 +565,6 @@ if __name__ == '__main__':
                 # print("Human is not present:", human_is_present, i)
                 make_text_invisible()
 
-        print("Received data with i " + str(i) + " rd " + str(received_data) + " hip " + str(human_is_present))
 
 
     finally:
