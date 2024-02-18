@@ -1,9 +1,0 @@
-for mvp:
-
-for product v2 (with human in area sensing):
-- [10min] figure out how to receieve a bluetooth packet (one 0/1 bit, turn off display if it's a 1.)
-- [5min] figure out how to receieve a bluetooth packet (two 0/1 bits, switch to news mode if tapped, revert to reminders mode when tapped again.)
-
-for product v3 (dance mode!!)
-- [5min] figure out how to receieve a bluetooth packet (two 0/1 bits, switch to DANCE MODE if tapped, revert to normal mode when untapped.)
-- [10min] add a metronome

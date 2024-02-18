@@ -116,7 +116,7 @@ class Reminders(Frame):
         #     widget.destroy()
 
         # Call the Tasks API
-        results = service.tasks().list(tasklist='@default', maxResults=5).execute()
+        results = service.tasks().list(tasklist='@default', maxResults=2).execute()
         items = results.get('items', [])
 
         new_titles = [item['title'] for item in items]  # Extract titles from fetched items
@@ -142,7 +142,7 @@ class Reminders(Frame):
 
         # self.after(600000, self.get_reminders)  # Refresh every 10 minutes
         self.after(600, self.get_reminders)  # Refresh every 10 minutes
-        # print("Refreshed reminders")
+        print("Refreshed reminders")
 
 class Reminder(Frame):
     def __init__(self, parent, reminder_text=""):
