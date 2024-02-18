@@ -231,7 +231,7 @@ class Clock(Frame):
     def record_dance(self):
         # Placeholder for the actual recording functionality
         print("Recording the dance!")
-        make_text_invisible()
+        # make_text_invisible()
 
 
 class Weather(Frame):
@@ -557,7 +557,12 @@ if __name__ == '__main__':
             #     human_is_present = False  # Initialize the flag to False
 
             # print("Human is present:", human_is_present, i)            
-
+            if human_is_present:
+                # print("Human is present:", human_is_present, i)
+                make_text_visible()
+            else:
+                # print("Human is not present:", human_is_present, i)
+                make_text_invisible()
 
     finally:
         if ser.is_open:
