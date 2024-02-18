@@ -102,3 +102,6 @@ def record():
             print("it exists!")
             upload_video(unique_filename)
             break
+
+if __name__ == "__main__":
+    record()
