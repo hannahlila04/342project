@@ -2,6 +2,8 @@
 # requirements
 # requests, feedparser, traceback, Pillow
 
+# from tkinter import *
+import tkinter
 from tkinter import *
 import locale
 import threading
@@ -37,6 +39,12 @@ large_text_size = 48
 medium_text_size = 28
 # small_text_size = 18
 small_text_size = 12
+
+# root = tkinter.Tk()
+# root.attributes('-fullscreen', True)  # Set the window to full-screen mode
+
+# label = tkinter.Label(root, text="Hello, Tkinter!")
+# label.pack()  # Make sure this line is present
 
 @contextmanager
 def setlocale(name): #thread proof function to work with locale
@@ -118,6 +126,7 @@ class Reminders(Frame):
 
         # self.after(600000, self.get_reminders)  # Refresh every 10 minutes
         self.after(600, self.get_reminders)  # Refresh every 10 minutes
+        print("Refreshed reminders")
 
 class Reminder(Frame):
     def __init__(self, parent, reminder_text=""):
@@ -364,13 +373,15 @@ class CalendarEvent(Frame):
 class FullscreenWindow:
 
     def __init__(self):
-        self.tk = Tk()
+        # self.tk = Tk()
+        self.tk = root
         self.tk.configure(background='black')
         self.topFrame = Frame(self.tk, background = 'black')
         self.bottomFrame = Frame(self.tk, background = 'black')
         self.topFrame.pack(side = TOP, fill=BOTH, expand = YES)
         self.bottomFrame.pack(side = BOTTOM, fill=BOTH, expand = YES)
         self.state = False
+        self.tk.attributes("-fullscreen", True)  # Start in fullscreen mode
         self.tk.bind("<Return>", self.toggle_fullscreen)
         self.tk.bind("<Escape>", self.end_fullscreen)
         # clock
@@ -402,6 +413,18 @@ class FullscreenWindow:
         self.tk.attributes("-fullscreen", False)
         return "break"
 
+# Add an exit method
+def exit(event):
+    root.destroy()
+
+
+# # Bind the escape key to exit full-screen mode and close the application
+# root.bind('<Escape>', exit)
+
+# root.mainloop()
+
+
 if __name__ == '__main__':
+    root = tkinter.Tk()
     w = FullscreenWindow()
     w.tk.mainloop()
