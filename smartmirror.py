@@ -480,7 +480,8 @@ if __name__ == '__main__':
                 # i += 1
 
             # Parse the received data
-            if received_data.startswith('p') and received_data.count(' ') == 1:
+            # if received_data.startswith('p') and received_data.count(' ') == 1:
+            if received_data.startswith(b'p') and received_data.count(b' ') == 1:
                 try:
                     p_val, i_val = map(int, received_data[1:].split(' '))
                     print("Parsed values: p={}, i={}".format(p_val, i_val))
