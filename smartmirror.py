@@ -12,6 +12,7 @@ import requests
 import json
 import traceback
 import feedparser
+from camera_stuff import record
 
 from PIL import Image, ImageTk
 from contextlib import contextmanager
@@ -205,6 +206,7 @@ class Clock(Frame):
 
     def record_dance(self):
         # Placeholder for the actual recording functionality
+        record()
         print("Recording the dance!")
 
 
@@ -474,7 +476,8 @@ if __name__ == '__main__':
         if ser.is_open:
             ser.close()
             print("Serial port closed.") 
-
+    
     root = tkinter.Tk()
     w = FullscreenWindow()
     w.tk.mainloop()
+    

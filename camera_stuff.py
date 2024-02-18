@@ -88,16 +88,17 @@ def upload_video(filename):
     # print('File ID: %s' % file.get('id'))
     print(f"Uploaded {filename} to Google Drive")
 
-# Record a 10-second video
-current_time = datetime.now()
-time_str = current_time.strftime('%Y-%m-%d_%H-%M-%S')
-unique_filename = f"dance_recording_{time_str}.mp4"
+def record():
+    # Record a 10-second video
+    current_time = datetime.now()
+    time_str = current_time.strftime('%Y-%m-%d_%H-%M-%S')
+    unique_filename = f"dance_recording_{time_str}.mp4"
 
-record_video(output_file=unique_filename, record_time=3)
+    record_video(output_file=unique_filename, record_time=3)
 
-# wait until unique_filename.mp4 is created, then upload it to Google Drive
-while True:
-    if os.path.exists(unique_filename):
-        print("it exists!")
-        upload_video(unique_filename)
-        break
+    # wait until unique_filename.mp4 is created, then upload it to Google Drive
+    while True:
+        if os.path.exists(unique_filename):
+            print("it exists!")
+            upload_video(unique_filename)
+            break
