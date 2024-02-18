@@ -509,33 +509,33 @@ def read_from_serial():
 
 
 if __name__ == '__main__':
-    serial_port = '/dev/ttyS0'  # This is the default UART port on Raspberry Pi 4B
-    # baud_rate = 9600  # Should match the baud rate configured on the STM32
-    baud_rate = 115200  # Should match the baud rate configured on the STM32
-    # timeout = 0  # Timeout for serial communication
+    # serial_port = '/dev/ttyS0'  # This is the default UART port on Raspberry Pi 4B
+    # # baud_rate = 9600  # Should match the baud rate configured on the STM32
+    # baud_rate = 115200  # Should match the baud rate configured on the STM32
+    # # timeout = 0  # Timeout for serial communication
 
-    # ser = serial.Serial(serial_port, baud_rate, timeout=timeout)
-    ser = serial.Serial(serial_port, baud_rate)
+    # # ser = serial.Serial(serial_port, baud_rate, timeout=timeout)
+    # ser = serial.Serial(serial_port, baud_rate)
 
-    # received_data = b''  # Initialize received_data before the loop
+    # # received_data = b''  # Initialize received_data before the loop
 
-    human_is_present = False  # Initialize the flag to False
+    # human_is_present = False  # Initialize the flag to False
 
     root = tkinter.Tk()
    
     w = FullscreenWindow()
 
-    root.after(100, read_from_serial)
+    # root.after(100, read_from_serial)
 
-    # make_text_invisible()
+    # # make_text_invisible()
 
 
 
     w.tk.mainloop()
 
-    if ser.is_open:
-        ser.close()
-        print("Serial port closed.") 
+    # if ser.is_open:
+    #     ser.close()
+    #     print("Serial port closed.") 
 
     # try:
     #     i = 0
