@@ -470,6 +470,7 @@ if __name__ == '__main__':
         while True:
             if ser.in_waiting > 0:
                 received_data = ser.readline().decode().strip()  # Read and decode the received data
+                recieved_data = "p 100 200" # test value
                 print("Received data:", received_data)
 
             # Parse the received data
