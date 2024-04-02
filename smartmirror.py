@@ -14,7 +14,6 @@ import traceback
 import feedparser
 from tkinter import Label, Button, Entry  # Ensure to import specific widget types you're using
 
-
 from PIL import Image, ImageTk
 from contextlib import contextmanager
 
@@ -108,7 +107,7 @@ class Reminders(Frame):
         super().__init__(parent, *args, **kwargs)
         self.config(bg='black')
         self.title = 'Reminders'
-        self.remindersLbl = Label(self, text=self.title, font=('Helvetica', medium_text_size), fg="white", bg="black")
+        self.remindersLbl = Label(self, text=self.title, font=('Avenir', medium_text_size), fg="white", bg="black")
         self.remindersLbl.pack(side=TOP, anchor=W)
         self.remindersContainer = Frame(self, bg="black")
         self.remindersContainer.pack(side=TOP)
@@ -158,7 +157,7 @@ class Reminders(Frame):
                     self.reminderTitles[i] = title  # Update the title being displayed
             else:
                 # Create new reminder widget if more titles than widgets
-                reminder = Label(self.remindersContainer, text=title, font=('Helvetica', small_text_size), fg="white", bg="black")
+                reminder = Label(self.remindersContainer, text=title, font=('Avenir', small_text_size), fg="white", bg="black")
                 reminder.pack(side=TOP, anchor=W)
                 self.reminderWidgets.append(reminder)  # Add widget to the list
                 self.reminderTitles.append(title)  # Add title to the list
@@ -176,10 +175,8 @@ class Reminder(Frame):
     def __init__(self, parent, reminder_text=""):
         Frame.__init__(self, parent, bg='black')
         self.reminderText = reminder_text
-        self.reminderLbl = Label(self, text=self.reminderText, font=('Helvetica', small_text_size), fg="white", bg="black")
+        self.reminderLbl = Label(self, text=self.reminderText, font=('Avenir', small_text_size), fg="white", bg="black")
         self.reminderLbl.pack(side=LEFT, anchor=N)
-
-
 
 
 class Clock(Frame):
@@ -187,20 +184,20 @@ class Clock(Frame):
         Frame.__init__(self, parent, bg='black')
         # initialize time label
         self.time1 = ''
-        self.timeLbl = Label(self, font=('Helvetica', large_text_size), fg="white", bg="black")
+        self.timeLbl = Label(self, font=('Avenir', large_text_size), fg="white", bg="black")
         self.timeLbl.pack(side=TOP, anchor=E)
         # initialize day of week
         self.day_of_week1 = ''
-        self.dayOWLbl = Label(self, text=self.day_of_week1, font=('Helvetica', small_text_size), fg="white", bg="black")
+        self.dayOWLbl = Label(self, text=self.day_of_week1, font=('Avenir', small_text_size), fg="white", bg="black")
         self.dayOWLbl.pack(side=TOP, anchor=E)
         # initialize date label
         self.date1 = ''
-        self.dateLbl = Label(self, text=self.date1, font=('Helvetica', small_text_size), fg="white", bg="black")
+        self.dateLbl = Label(self, text=self.date1, font=('Avenir', small_text_size), fg="white", bg="black")
         self.dateLbl.pack(side=TOP, anchor=E)
 
        # Add a button for recording dance
-        self.recordButton = Button(self, text="Record my dance!!!", command=self.record_dance, font=('Helvetica', small_text_size), fg="white", bg="black")
-        self.recordButton.pack(side=TOP, anchor=E, pady=10)  # Add some padding to separate from the date
+        #self.recordButton = Button(self, text="Record my dance!!!", command=self.record_dance, font=('Avenir', small_text_size), fg="white", bg="black")
+        #self.recordButton.pack(side=TOP, anchor=E, pady=10)  # Add some padding to separate from the date
 
         self.tick()
 
@@ -230,6 +227,15 @@ class Clock(Frame):
 
     def record_dance(self):
         # Placeholder for the actual recording functionality
+<<<<<<< Updated upstream
+=======
+        # record()
+        #command = f" ssh {user}@{ipaddr} '/Library/Frameworks/Python.framework/Versions/3.9/bin/python3.9 /Users/anooprehman/Documents/uoft/extracurricular/hackathons/makeuoft/342project/camera_stuff.py'"
+        #os.system(command)
+
+        #command2 = f" sshpass -p 'password' ssh anooprehman@ip '/Library/Frameworks/Python.framework/Versions/3.9/bin/python3.9 /Users/anooprehman/Documents/uoft/extracurricular/hackathons/makeuoft/342project/camera_stuff.py'";
+        #os.system(command2)
+>>>>>>> Stashed changes
         print("Recording the dance!")
         # make_text_invisible()
 
@@ -244,15 +250,15 @@ class Weather(Frame):
         self.icon = ''
         self.degreeFrm = Frame(self, bg="black")
         self.degreeFrm.pack(side=TOP, anchor=W)
-        self.temperatureLbl = Label(self.degreeFrm, font=('Helvetica', xlarge_text_size), fg="white", bg="black")
+        self.temperatureLbl = Label(self.degreeFrm, font=('Avenir', xlarge_text_size), fg="white", bg="black")
         self.temperatureLbl.pack(side=LEFT, anchor=N)
         self.iconLbl = Label(self.degreeFrm, bg="black")
         self.iconLbl.pack(side=LEFT, anchor=N, padx=20)
-        self.currentlyLbl = Label(self, font=('Helvetica', medium_text_size), fg="white", bg="black")
+        self.currentlyLbl = Label(self, font=('Avenir', medium_text_size), fg="white", bg="black")
         self.currentlyLbl.pack(side=TOP, anchor=W)
-        self.forecastLbl = Label(self, font=('Helvetica', small_text_size), fg="white", bg="black")
+        self.forecastLbl = Label(self, font=('Avenir', small_text_size), fg="white", bg="black")
         self.forecastLbl.pack(side=TOP, anchor=W)
-        self.locationLbl = Label(self, font=('Helvetica', small_text_size), fg="white", bg="black")
+        self.locationLbl = Label(self, font=('Avenir', small_text_size), fg="white", bg="black")
         self.locationLbl.pack(side=TOP, anchor=W)
         # self.get_weather()
 
@@ -341,13 +347,12 @@ class Weather(Frame):
     def convert_kelvin_to_fahrenheit(kelvin_temp):
         return 1.8 * (kelvin_temp - 273) + 32
 
-
 class News(Frame):
     def __init__(self, parent, *args, **kwargs):
         Frame.__init__(self, parent, *args, **kwargs)
         self.config(bg='black')
         self.title = 'News' # 'News' is more internationally generic
-        self.newsLbl = Label(self, text=self.title, font=('Helvetica', medium_text_size), fg="white", bg="black")
+        self.newsLbl = Label(self, text=self.title, font=('Avenir', medium_text_size), fg="white", bg="black")
         self.newsLbl.pack(side=TOP, anchor=W)
         self.headlinesContainer = Frame(self, bg="black")
         self.headlinesContainer.pack(side=TOP)
@@ -389,7 +394,7 @@ class NewsHeadline(Frame):
         self.iconLbl.pack(side=LEFT, anchor=N)
 
         self.eventName = event_name
-        self.eventNameLbl = Label(self, text=self.eventName, font=('Helvetica', small_text_size), fg="white", bg="black")
+        self.eventNameLbl = Label(self, text=self.eventName, font=('Avenir', small_text_size), fg="white", bg="black")
         self.eventNameLbl.pack(side=LEFT, anchor=N)
 
 
@@ -397,7 +402,7 @@ class Calendar(Frame):
     def __init__(self, parent, *args, **kwargs):
         Frame.__init__(self, parent, bg='black')
         self.title = 'Calendar Events'
-        self.calendarLbl = Label(self, text=self.title, font=('Helvetica', medium_text_size), fg="white", bg="black")
+        self.calendarLbl = Label(self, text=self.title, font=('Avenir', medium_text_size), fg="white", bg="black")
         self.calendarLbl.pack(side=TOP, anchor=E)
         self.calendarEventContainer = Frame(self, bg='black')
         self.calendarEventContainer.pack(side=TOP, anchor=E)
@@ -420,7 +425,7 @@ class CalendarEvent(Frame):
     def __init__(self, parent, event_name="Event 1"):
         Frame.__init__(self, parent, bg='black')
         self.eventName = event_name
-        self.eventNameLbl = Label(self, text=self.eventName, font=('Helvetica', small_text_size), fg="white", bg="black")
+        self.eventNameLbl = Label(self, text=self.eventName, font=('Avenir', small_text_size), fg="white", bg="black")
         self.eventNameLbl.pack(side=TOP, anchor=E)
 
 
@@ -452,7 +457,6 @@ class FullscreenWindow:
         # Call the function to make text invisible
         # make_text_invisible()
 
-
         self.reminders = Reminders(self.bottomFrame)
         self.reminders.pack(side=LEFT, anchor=S, padx=100, pady=60)
 
@@ -474,10 +478,8 @@ class FullscreenWindow:
 def exit(event):
     root.destroy()
 
-
 # # Bind the escape key to exit full-screen mode and close the application
 # root.bind('<Escape>', exit)
-
 # root.mainloop()
 
 def read_from_serial():
@@ -495,38 +497,34 @@ def read_from_serial():
             # Schedule this function to be called again after 100 milliseconds
     root.after(100, read_from_serial)
 
-
-
 if __name__ == '__main__':
-    serial_port = '/dev/ttyS0'  # This is the default UART port on Raspberry Pi 4B
-    # baud_rate = 9600  # Should match the baud rate configured on the STM32
-    baud_rate = 115200  # Should match the baud rate configured on the STM32
+    '''serial_port = '/dev/ttyS0'  # This is the default UART port on Raspberry Pi 4B
+    baud_rate = 9600  # Should match the baud rate configured on the STM32
     # timeout = 0  # Timeout for serial communication
 
-    # ser = serial.Serial(serial_port, baud_rate, timeout=timeout)
     ser = serial.Serial(serial_port, baud_rate)
 
-    # received_data = b''  # Initialize received_data before the loop
+    received_data = b''  # Initialize received_data before the loop
 
     human_is_present = False  # Initialize the flag to False
+<<<<<<< Updated upstream
 
 
+=======
+'''
+>>>>>>> Stashed changes
     root = tkinter.Tk()
-   
     w = FullscreenWindow()
 
-    root.after(100, read_from_serial)
-
-    # make_text_invisible()
-
-
+    #root.after(100, read_from_serial)
+    #make_text_invisible()
 
     w.tk.mainloop()
 
-    if ser.is_open:
+    '''if ser.is_open:
         ser.close()
         print("Serial port closed.") 
-
+    '''
     # try:
     #     i = 0
 

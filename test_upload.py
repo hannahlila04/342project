@@ -6,8 +6,6 @@ from google.oauth2.credentials import Credentials
 import os.path
 from datetime import datetime
 
-
-
 # If modifying these SCOPES, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/drive.file']
 
