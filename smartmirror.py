@@ -227,15 +227,6 @@ class Clock(Frame):
 
     def record_dance(self):
         # Placeholder for the actual recording functionality
-<<<<<<< Updated upstream
-=======
-        # record()
-        #command = f" ssh {user}@{ipaddr} '/Library/Frameworks/Python.framework/Versions/3.9/bin/python3.9 /Users/anooprehman/Documents/uoft/extracurricular/hackathons/makeuoft/342project/camera_stuff.py'"
-        #os.system(command)
-
-        #command2 = f" sshpass -p 'password' ssh anooprehman@ip '/Library/Frameworks/Python.framework/Versions/3.9/bin/python3.9 /Users/anooprehman/Documents/uoft/extracurricular/hackathons/makeuoft/342project/camera_stuff.py'";
-        #os.system(command2)
->>>>>>> Stashed changes
         print("Recording the dance!")
         # make_text_invisible()
 
