@@ -517,10 +517,16 @@ if __name__ == '__main__':
             data = serial_port.readline().decode().strip()
             
             # Parse the received data
-            if data.startswith('p') and data[1:].isdigit():
-                pir = int(data[1:])
-            elif data.startswith('i') and data[1:].isdigit():
-                ir = int(data[1:])
+            if data.startswith('p') and ' ' in data:
+                p_index = data.index(' ')
+                pir_str = data[1:p_index]
+                if pir_str.isdigit():
+                    pir = int(pir_str)
+            
+            if data.startswith('i'):
+                ir_str = data[1:]
+                if ir_str.isdigit():
+                    ir = int(ir_str)
             
             # Print the received data to verify
             print("PIR:", pir, "IR:", ir)
