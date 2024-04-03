@@ -499,14 +499,35 @@ if __name__ == '__main__':
 
     human_is_present = False  # Initialize the flag to False
 '''
-    root = tkinter.Tk()
-    w = FullscreenWindow()
 
     #root.after(100, read_from_serial)
     #make_text_invisible()
+    # Device 00:21:13:05:F0:64 HC-06
+    # ls /dev/rfcomm0
+    
+    # Replace '/dev/rfcomm0' with the correct path to your HC-06 Bluetooth device
+    serial_port = serial.Serial('/dev/rfcomm0', baudrate=9600, timeout=1)
 
+    try:
+        while True:
+            # Read data from the HC-06 Bluetooth module
+            data = serial_port.readline().decode().strip()
+            
+            # Print the received data to the console
+            print("Received:", data)
+
+    except KeyboardInterrupt:
+        print("KeyboardInterrupt: Exiting program")
+
+    finally:
+        # Close the serial port when done
+        serial_port.close()
+
+'''
+    root = tkinter.Tk()
+    w = FullscreenWindow()
     w.tk.mainloop()
-
+'''
     '''if ser.is_open:
         ser.close()
         print("Serial port closed.") 
