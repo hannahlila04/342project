@@ -522,11 +522,10 @@ if __name__ == '__main__':
                 pir_str = data[1:p_index]
                 if pir_str.isdigit():
                     pir = int(pir_str)
-            
-            if data.startswith('i'):
-                ir_str = data[1:]
-                if ir_str.isdigit():
-                    ir = int(ir_str)
+                if 'i' in data:
+                    ir_str = data[data.index('i')+1:]
+                    if ir_str.isdigit():
+                        ir = int(ir_str)
             
             # Print the received data to verify
             print("PIR:", pir, "IR:", ir)
