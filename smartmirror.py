@@ -532,7 +532,7 @@ if __name__ == '__main__':
                 make_text_visible()
                 
             # Print the received data to verify
-            #print("PIR:", pir, "IR:", ir)
+            print("PIR:", pir, "IR:", ir)
 
     finally:
         # Close the serial port when done
