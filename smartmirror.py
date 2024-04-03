@@ -523,11 +523,11 @@ if __name__ == '__main__':
         # Close the serial port when done
         serial_port.close()
 
-'''
+    '''
     root = tkinter.Tk()
     w = FullscreenWindow()
     w.tk.mainloop()
-'''
+    '''
     '''if ser.is_open:
         ser.close()
         print("Serial port closed.") 
