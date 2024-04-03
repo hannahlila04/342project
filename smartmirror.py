@@ -508,16 +508,22 @@ if __name__ == '__main__':
     # Replace '/dev/rfcomm0' with the correct path to your HC-06 Bluetooth device
     serial_port = serial.Serial('/dev/rfcomm0', baudrate=9600, timeout=1)
 
+    pir = 0
+    ir = 0
+
     try:
         while True:
             # Read data from the HC-06 Bluetooth module
             data = serial_port.readline().decode().strip()
             
-            # Print the received data to the console
-            print("Received:", data)
-
-    except KeyboardInterrupt:
-        print("KeyboardInterrupt: Exiting program")
+            # Parse the received data
+            if data.startswith('p') and data[1:].isdigit():
+                pir = int(data[1:])
+            elif data.startswith('i') and data[1:].isdigit():
+                ir = int(data[1:])
+            
+            # Print the received data to verify
+            print("PIR:", pir, "IR:", ir)
 
     finally:
         # Close the serial port when done
