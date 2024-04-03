@@ -440,7 +440,7 @@ class FullscreenWindow:
         self.topFrame = Frame(self.tk, background = 'black')
         self.bottomFrame = Frame(self.tk, background = 'black')
         self.topFrame.pack(side = TOP, fill=BOTH, expand = YES)
-        self.bottomFrame.pack(side = BOTTOM, fill=BOTH, expand = YES,  padx=50, pady=50, anchor=SW)
+        self.bottomFrame.pack(side = BOTTOM, fill=BOTH, expand = YES,  padx=100, pady=250, anchor=SW)
         self.state = False
         self.tk.attributes("-fullscreen", True)  # Start in fullscreen mode
         self.tk.bind("<Return>", self.toggle_fullscreen)
