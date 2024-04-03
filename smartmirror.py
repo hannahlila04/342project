@@ -44,8 +44,8 @@ medium_text_size = 28
 small_text_size = 18
 #small_text_size = 12
 
-root = tkinter.Tk()
-root.attributes('-fullscreen', True)  # Set the window to full-screen mode
+#root = tkinter.Tk()
+#root.attributes('-fullscreen', True)  # Set the window to full-screen mode
 
 # label = tkinter.Label(root, text="Hello, Tkinter!")
 # label.pack()  # Make sure this line is present
@@ -82,22 +82,22 @@ icon_lookup = {
 def make_text_invisible():
     print("Making text invisible!!!!")
     for widget in root.winfo_children():
-        # # Apply only to widgets that support text or foreground color change
-        # if isinstance(widget, (Label, Button, Entry)):
-        #     try:
-        #         widget.config(foreground="black")  # Assuming black is your background color
-        #     except tkinter.TclError as e:
-        #         print(f"Error updating widget: {e}")
+        # Apply only to widgets that support text or foreground color change
+        if isinstance(widget, (Label, Button, Entry)):
+            try:
+                 widget.config(foreground="black")  # Assuming black is your background color
+            except tkinter.TclError as e:
+                 print(f"Error updating widget: {e}")
         widget.pack_forget()  # Hide the widget
 
 # Function to make text visible for supported widgets
 def make_text_visible():
     for widget in root.winfo_children():
-        # # if isinstance(widget, (Label, Button, Entry)):
-        # try:
-        #     widget.config(foreground="white")  # Change to your desired text color
-        # except tkinter.TclError as e:
-        #     print(f"Error updating widget: {e}")
+        if isinstance(widget, (Label, Button, Entry)):
+            try:
+                widget.config(foreground="white")  # Change to your desired text color
+            except tkinter.TclError as e:
+                print(f"Error updating widget: {e}")
         widget.pack() 
 
 
@@ -178,6 +178,13 @@ class Reminder(Frame):
         self.reminderLbl = Label(self, text=self.reminderText, font=('Avenir', small_text_size), fg="white", bg="black")
         self.reminderLbl.pack(side=LEFT, anchor=N)
 
+class Dance(Frame):
+    def __init__(self, parent, reminder_text=""):
+        Frame.__init__(self, parent, bg='black')
+        # Initialize label for "Recording Dance" text
+        self.recording_label = Label(self, text="Recording Dance", font=('Avenir', large_text_size), fg="white", bg="black")
+        self.recording_label.place(relx=0.5, rely=0.5, anchor=CENTER)
+        
 
 class Clock(Frame):
     def __init__(self, parent, *args, **kwargs):
@@ -228,9 +235,9 @@ class Clock(Frame):
     def record_dance(self):
         # Placeholder for the actual recording functionality
         # Initialize label for "Recording Dance" text
-        self.recording_label = Label(self.tk, text="Recording Dance", font=('Avenir', large_text_size), fg="white", bg="black")
-        self.recording_label.place(relx=0.5, rely=0.5, anchor=CENTER)
-        self.recording_label.pack_forget()  # Hide the label initially
+        #self.recording_label = Label(self.tk, text="Recording Dance", font=('Avenir', large_text_size), fg="white", bg="black")
+        #self.recording_label.place(relx=0.5, rely=0.5, anchor=CENTER)
+        #self.recording_label.pack_forget()  # Hide the label initially
         print("Recording the dance!")
         # make_text_invisible()
 
@@ -433,7 +440,7 @@ class FullscreenWindow:
         self.topFrame = Frame(self.tk, background = 'black')
         self.bottomFrame = Frame(self.tk, background = 'black')
         self.topFrame.pack(side = TOP, fill=BOTH, expand = YES)
-        self.bottomFrame.pack(side = BOTTOM, fill=BOTH, expand = YES)
+        self.bottomFrame.pack(side = BOTTOM, fill=BOTH, expand = YES,  padx=50, pady=50, anchor=SW)
         self.state = False
         self.tk.attributes("-fullscreen", True)  # Start in fullscreen mode
         self.tk.bind("<Return>", self.toggle_fullscreen)
@@ -453,11 +460,9 @@ class FullscreenWindow:
         # make_text_invisible()
 
         self.reminders = Reminders(self.bottomFrame)
-        self.reminders.pack(side=LEFT, anchor=S, padx=100, pady=60)
+        self.reminders.pack(side=LEFT, anchor=S, padx=100, pady=200)
         
-        # Initialize label for "Recording Dance" text
-        self.recording_label = Label(self.tk, text="Recording Dance", font=('Avenir', large_text_size), fg="white", bg="black")
-        self.recording_label.place(relx=0.5, rely=0.5, anchor=CENTER)
+        self.recording_label = Dance(self.bottomFrame)
         self.recording_label.pack_forget()  # Hide the label initially
 
         # calender - removing for now
@@ -494,6 +499,7 @@ if __name__ == '__main__':
     # Bind the escape key to exit full-screen mode and close the application
     root.bind('<Button-3>', exit)
     w = FullscreenWindow()
+    w.tk.mainloop()
 
     try:
         while True:
@@ -526,13 +532,13 @@ if __name__ == '__main__':
                 make_text_visible()
                 
             # Print the received data to verify
-            print("PIR:", pir, "IR:", ir)
+            #print("PIR:", pir, "IR:", ir)
 
     finally:
         # Close the serial port when done
         serial_port.close()
+        exit(0)
 
-    '''
-    '''
+
 
 
