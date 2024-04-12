@@ -429,9 +429,9 @@ class FullscreenWindow:
         self.tk = root
         self.tk.configure(background='black')
         self.topFrame = Frame(self.tk, background = 'black')
-        self.bottomFrame = Frame(self.tk, background = 'white')
-        self.topFrame.pack(side = TOP, fill=BOTH, expand = YES)
-        self.bottomFrame.pack(side = BOTTOM, fill=BOTH, expand = YES,  padx=500, pady=1200, anchor=SW)
+        self.bottomFrame = Frame(self.tk, background = 'black')
+        self.topFrame.pack(side = TOP, fill=BOTH, expand = YES, padx=500, pady=200, anchor=NW)
+        self.bottomFrame.pack(side = BOTTOM, fill=BOTH, expand = YES,  padx=500, pady=2500, anchor=SW)
         self.state = False
         self.tk.attributes("-fullscreen", True)  # Start in fullscreen mode
         self.tk.bind("<Return>", self.toggle_fullscreen)
@@ -441,17 +441,17 @@ class FullscreenWindow:
         self.clock.pack(side=RIGHT, anchor=N, padx=100, pady=60)
         # weather
         self.weather = Weather(self.topFrame)
-        self.weather.pack(side=LEFT, anchor=N, padx=100, pady=60)
+        self.weather.pack(side=LEFT, anchor=N, padx=100, pady=0)
         # news
         # UNCOMMENTING!!
         self.news = News(self.bottomFrame)
-        self.news.pack(side=TOP, anchor=W, padx=0, pady=300)
+        self.news.pack(side=TOP, anchor=W, padx=0, pady=250)
         self.news.pack_forget()  # Hide the news initially
         # Call the function to make text invisible
         # make_text_invisible()
 
         self.reminders = Reminders(self.bottomFrame)
-        self.reminders.pack(side=TOP, anchor=W, padx=0, pady=300)
+        self.reminders.pack(side=TOP, anchor=W, padx=0, pady=250)
         
         self.recording_label = Dance(self.topFrame)
         self.recording_label.pack_forget()  # Hide the label initially
@@ -491,7 +491,7 @@ if __name__ == '__main__':
     # Replace '/dev/rfcomm0' with the correct path to your HC-06 Bluetooth device
     #serial_port = serial.Serial('/dev/rfcomm0', baudrate=9600, timeout=1)
 
-    ''' For testing without the Bluetooth module:
+    #''' For testing without the Bluetooth module:
     
     pir = 0
     ir = 0
@@ -532,12 +532,12 @@ if __name__ == '__main__':
     finally:
         # Close the serial port when done
         #serial_port.close()
-        exit(0)'''
+        exit(0)
 
     #make_text_invisible()
     # Device 00:21:13:05:F0:64 HC-06
     # ls /dev/rfcomm0
-    
+    ''' For testing with Bluetooth module:
     serial_port = serial.Serial('/dev/rfcomm0', baudrate=9600, timeout=1)
 
     pir = 0
@@ -593,47 +593,4 @@ if __name__ == '__main__':
     finally:
         # Close the serial port when done
         serial_port.close()
-        exit(0)
-
-'''
-    try:
-        while True:
-            # Read data from the HC-06 Bluetooth module
-            data = serial_port.readline().decode().strip()
-            
-            # Parse the received data
-            if data.startswith('p') and ' ' in data:
-                p_index = data.index(' ')
-                pir_str = data[1:p_index]
-                if pir_str.isdigit():
-                    pir = int(pir_str)
-                if 'i' in data:
-                    ir_str = data[data.index('i')+1:]
-                    if ir_str.isdigit():
-                        ir = int(ir_str)
-            
-            # Toggle reminders based on ir value
-            if ir == 1:
-                w.reminders.pack_forget()  # Hide reminders
-                w.recording_label.pack(relx=0.5, rely=0.5, anchor=CENTER)
-            else:
-                w.reminders.pack(side=LEFT, anchor=S, padx=100, pady=100)  # Show reminders
-                w.recording_label.pack_forget()
-                
-            # Make all text invisible when pir == 0
-            if pir == 0:
-                make_text_invisible()
-            else:
-                make_text_visible()
-                
-            # Print the received data to verify
-            print("PIR:", pir, "IR:", ir)
-
-    finally:
-        # Close the serial port when done
-        serial_port.close()
-        exit(0)
-'''
-
-
-
+        exit(0)'''
