@@ -491,7 +491,7 @@ if __name__ == '__main__':
     # Replace '/dev/rfcomm0' with the correct path to your HC-06 Bluetooth device
     #serial_port = serial.Serial('/dev/rfcomm0', baudrate=9600, timeout=1)
 
-    #''' For testing without the Bluetooth module:
+    ''' For testing without the Bluetooth module:
     
     pir = 0
     ir = 0
@@ -537,7 +537,7 @@ if __name__ == '__main__':
     #make_text_invisible()
     # Device 00:21:13:05:F0:64 HC-06
     # ls /dev/rfcomm0
-    ''' For testing with Bluetooth module:
+    ''' # For testing with Bluetooth module:
     serial_port = serial.Serial('/dev/rfcomm0', baudrate=9600, timeout=1)
 
     pir = 0
@@ -593,4 +593,4 @@ if __name__ == '__main__':
     finally:
         # Close the serial port when done
         serial_port.close()
-        exit(0)'''
+        exit(0)
