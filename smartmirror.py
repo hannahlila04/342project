@@ -31,7 +31,7 @@ LOCALE_LOCK = threading.Lock()
 ui_locale = '' # e.g. 'fr_FR' fro French, '' as default
 time_format = 12 # 12 or 24
 date_format = "%b %d, %Y" # check python doc for strftime() for options
-news_country_code = 'us'
+news_country_code = 'ca'
 # weather_api_token = '<TOKEN>' # create account at https://darksky.net/dev/
 weather_api_token = '<TOKEN>' # create account at https://darksky.net/dev/
 weather_lang = 'en' # see https://darksky.net/dev/docs/forecast for full list of language parameters values
@@ -80,7 +80,7 @@ icon_lookup = {
 
 # Function to make text invisible for supported widgets
 def make_text_invisible():
-    print("Making text invisible!!!!")
+    #print("Making text invisible!!!!")
     for widget in root.winfo_children():
         # Apply only to widgets that support text or foreground color change
         if isinstance(widget, (Label, Button, Entry)):
@@ -106,8 +106,8 @@ class Reminders(Frame):
         # Frame.__init__(self, parent, *args, **kwargs)
         super().__init__(parent, *args, **kwargs)
         self.config(bg='black')
-        self.title = 'Reminders'
-        self.remindersLbl = Label(self, text=self.title, font=('Avenir', medium_text_size), fg="white", bg="black")
+        self.title = "Today's Tasks"
+        self.remindersLbl = Label(self, text=self.title, font=('Georgia', medium_text_size, 'bold'), fg="white", bg="black")
         self.remindersLbl.pack(side=TOP, anchor=W)
         self.remindersContainer = Frame(self, bg="black")
         self.remindersContainer.pack(side=TOP)
@@ -175,15 +175,15 @@ class Reminder(Frame):
     def __init__(self, parent, reminder_text=""):
         Frame.__init__(self, parent, bg='black')
         self.reminderText = reminder_text
-        self.reminderLbl = Label(self, text=self.reminderText, font=('Avenir', small_text_size), fg="white", bg="black")
+        self.reminderLbl = Label(self, text=self.reminderText, font=('Avenir', small_text_size), fg="white", bg="black", justify=LEFT)
         self.reminderLbl.pack(side=LEFT, anchor=N)
 
 class Dance(Frame):
-    def __init__(self, parent, reminder_text=""):
+    def __init__(self, parent):
         Frame.__init__(self, parent, bg='black')
         # Initialize label for "Recording Dance" text
-        self.recording_label = Label(self, text="Recording Dance", font=('Avenir', large_text_size), fg="white", bg="black")
-        self.recording_label.place(relx=0.5, rely=0.5, anchor=CENTER)
+        self.recording_label = Label(self, text="Recording your dance!", font=('Avenir Black', small_text_size), fg="white", bg="black")
+        self.recording_label.pack(side=TOP, anchor=W, padx=100, pady=300)
         
 
 class Clock(Frame):
@@ -191,19 +191,19 @@ class Clock(Frame):
         Frame.__init__(self, parent, bg='black')
         # initialize time label
         self.time1 = ''
-        self.timeLbl = Label(self, font=('Avenir', large_text_size), fg="white", bg="black")
+        self.timeLbl = Label(self, font=('Georgia', large_text_size), fg="white", bg="black")
         self.timeLbl.pack(side=TOP, anchor=E)
         # initialize day of week
         self.day_of_week1 = ''
-        self.dayOWLbl = Label(self, text=self.day_of_week1, font=('Avenir', small_text_size), fg="white", bg="black")
+        self.dayOWLbl = Label(self, text=self.day_of_week1, font=('Georgia', small_text_size), fg="white", bg="black")
         self.dayOWLbl.pack(side=TOP, anchor=E)
         # initialize date label
         self.date1 = ''
-        self.dateLbl = Label(self, text=self.date1, font=('Avenir', small_text_size), fg="white", bg="black")
+        self.dateLbl = Label(self, text=self.date1, font=('Georgia', small_text_size), fg="white", bg="black")
         self.dateLbl.pack(side=TOP, anchor=E)
 
        # Add a button for recording dance
-        #self.recordButton = Button(self, text="Record my dance!!!", command=self.record_dance, font=('Avenir', small_text_size), fg="white", bg="black")
+        #self.recordButton = Button(self, text="Record my dance!!!", command=self.record_dance, font=('Georgia', small_text_size), fg="white", bg="black")
         #self.recordButton.pack(side=TOP, anchor=E, pady=10)  # Add some padding to separate from the date
 
         self.tick()
@@ -235,7 +235,7 @@ class Clock(Frame):
     def record_dance(self):
         # Placeholder for the actual recording functionality
         # Initialize label for "Recording Dance" text
-        #self.recording_label = Label(self.tk, text="Recording Dance", font=('Avenir', large_text_size), fg="white", bg="black")
+        #self.recording_label = Label(self.tk, text="Recording Dance", font=('Georgia', large_text_size), fg="white", bg="black")
         #self.recording_label.place(relx=0.5, rely=0.5, anchor=CENTER)
         #self.recording_label.pack_forget()  # Hide the label initially
         print("Recording the dance!")
@@ -252,15 +252,15 @@ class Weather(Frame):
         self.icon = ''
         self.degreeFrm = Frame(self, bg="black")
         self.degreeFrm.pack(side=TOP, anchor=W)
-        self.temperatureLbl = Label(self.degreeFrm, font=('Avenir', xlarge_text_size), fg="white", bg="black")
+        self.temperatureLbl = Label(self.degreeFrm, font=('Georgia', xlarge_text_size), fg="white", bg="black")
         self.temperatureLbl.pack(side=LEFT, anchor=N)
         self.iconLbl = Label(self.degreeFrm, bg="black")
         self.iconLbl.pack(side=LEFT, anchor=N, padx=20)
-        self.currentlyLbl = Label(self, font=('Avenir', medium_text_size), fg="white", bg="black")
+        self.currentlyLbl = Label(self, font=('Georgia', medium_text_size), fg="white", bg="black")
         self.currentlyLbl.pack(side=TOP, anchor=W)
-        self.forecastLbl = Label(self, font=('Avenir', small_text_size), fg="white", bg="black")
+        self.forecastLbl = Label(self, font=('Georgia', small_text_size), fg="white", bg="black")
         self.forecastLbl.pack(side=TOP, anchor=W)
-        self.locationLbl = Label(self, font=('Avenir', small_text_size), fg="white", bg="black")
+        self.locationLbl = Label(self, font=('Georgia', small_text_size), fg="white", bg="black")
         self.locationLbl.pack(side=TOP, anchor=W)
         # self.get_weather()
 
@@ -354,7 +354,7 @@ class News(Frame):
         Frame.__init__(self, parent, *args, **kwargs)
         self.config(bg='black')
         self.title = 'News' # 'News' is more internationally generic
-        self.newsLbl = Label(self, text=self.title, font=('Avenir', medium_text_size), fg="white", bg="black")
+        self.newsLbl = Label(self, text=self.title, font=('Georgia', medium_text_size, 'bold'), fg="white", bg="black")
         self.newsLbl.pack(side=TOP, anchor=W)
         self.headlinesContainer = Frame(self, bg="black")
         self.headlinesContainer.pack(side=TOP)
@@ -366,13 +366,14 @@ class News(Frame):
             for widget in self.headlinesContainer.winfo_children():
                 widget.destroy()
             if news_country_code == None:
-                headlines_url = "https://news.google.com/news?ned=us&output=rss"
+                headlines_url = "https://news.google.com/news?ned=ca&output=rss"
             else:
                 headlines_url = "https://news.google.com/news?ned=%s&output=rss" % news_country_code
 
             feed = feedparser.parse(headlines_url)
+            #print("Parsed feed entries:", len(feed.entries))  # Debugging print
 
-            for post in feed.entries[0:5]:
+            for post in feed.entries[0:2]:
                 headline = NewsHeadline(self.headlinesContainer, post.title)
                 headline.pack(side=TOP, anchor=W)
         except Exception as e:
@@ -385,18 +386,8 @@ class News(Frame):
 class NewsHeadline(Frame):
     def __init__(self, parent, event_name=""):
         Frame.__init__(self, parent, bg='black')
-
-        image = Image.open("assets/Newspaper.png")
-        image = image.resize((25, 25), Image.ANTIALIAS)
-        image = image.convert('RGB')
-        photo = ImageTk.PhotoImage(image)
-
-        self.iconLbl = Label(self, bg='black', image=photo)
-        self.iconLbl.image = photo
-        self.iconLbl.pack(side=LEFT, anchor=N)
-
         self.eventName = event_name
-        self.eventNameLbl = Label(self, text=self.eventName, font=('Avenir', small_text_size), fg="white", bg="black")
+        self.eventNameLbl = Label(self, text=self.eventName, font=('Avenir', small_text_size), fg="white", bg="black", wraplength=600, justify=LEFT)
         self.eventNameLbl.pack(side=LEFT, anchor=N)
 
 
@@ -404,7 +395,7 @@ class Calendar(Frame):
     def __init__(self, parent, *args, **kwargs):
         Frame.__init__(self, parent, bg='black')
         self.title = 'Calendar Events'
-        self.calendarLbl = Label(self, text=self.title, font=('Avenir', medium_text_size), fg="white", bg="black")
+        self.calendarLbl = Label(self, text=self.title, font=('Georgia', medium_text_size), fg="white", bg="black")
         self.calendarLbl.pack(side=TOP, anchor=E)
         self.calendarEventContainer = Frame(self, bg='black')
         self.calendarEventContainer.pack(side=TOP, anchor=E)
@@ -427,7 +418,7 @@ class CalendarEvent(Frame):
     def __init__(self, parent, event_name="Event 1"):
         Frame.__init__(self, parent, bg='black')
         self.eventName = event_name
-        self.eventNameLbl = Label(self, text=self.eventName, font=('Avenir', small_text_size), fg="white", bg="black")
+        self.eventNameLbl = Label(self, text=self.eventName, font=('Georgia', small_text_size), fg="white", bg="black")
         self.eventNameLbl.pack(side=TOP, anchor=E)
 
 
@@ -438,9 +429,9 @@ class FullscreenWindow:
         self.tk = root
         self.tk.configure(background='black')
         self.topFrame = Frame(self.tk, background = 'black')
-        self.bottomFrame = Frame(self.tk, background = 'black')
+        self.bottomFrame = Frame(self.tk, background = 'white')
         self.topFrame.pack(side = TOP, fill=BOTH, expand = YES)
-        self.bottomFrame.pack(side = BOTTOM, fill=BOTH, expand = YES,  padx=100, pady=250, anchor=SW)
+        self.bottomFrame.pack(side = BOTTOM, fill=BOTH, expand = YES,  padx=500, pady=1200, anchor=SW)
         self.state = False
         self.tk.attributes("-fullscreen", True)  # Start in fullscreen mode
         self.tk.bind("<Return>", self.toggle_fullscreen)
@@ -453,16 +444,16 @@ class FullscreenWindow:
         self.weather.pack(side=LEFT, anchor=N, padx=100, pady=60)
         # news
         # UNCOMMENTING!!
-        # self.news = News(self.bottomFrame)
-        # self.news.pack(side=LEFT, anchor=S, padx=100, pady=60)
-
+        self.news = News(self.bottomFrame)
+        self.news.pack(side=TOP, anchor=W, padx=0, pady=300)
+        self.news.pack_forget()  # Hide the news initially
         # Call the function to make text invisible
         # make_text_invisible()
 
         self.reminders = Reminders(self.bottomFrame)
-        self.reminders.pack(side=LEFT, anchor=S, padx=100, pady=200)
+        self.reminders.pack(side=TOP, anchor=W, padx=0, pady=300)
         
-        self.recording_label = Dance(self.bottomFrame)
+        self.recording_label = Dance(self.topFrame)
         self.recording_label.pack_forget()  # Hide the label initially
 
         # calender - removing for now
@@ -482,6 +473,14 @@ class FullscreenWindow:
 # Add an exit method
 def exit(event):
     root.destroy()
+    
+def toggle_pir(event):
+    global pir
+    pir = (pir + 1) % 2
+
+def toggle_ir(event):
+    global ir
+    ir = (ir + 1) % 2
 
 if __name__ == '__main__':
 
@@ -490,6 +489,55 @@ if __name__ == '__main__':
     # ls /dev/rfcomm0
     
     # Replace '/dev/rfcomm0' with the correct path to your HC-06 Bluetooth device
+    #serial_port = serial.Serial('/dev/rfcomm0', baudrate=9600, timeout=1)
+
+    ''' For testing without the Bluetooth module:
+    
+    pir = 0
+    ir = 0
+
+    root = tkinter.Tk()
+    # Bind the escape key to exit full-screen mode and close the application
+    root.bind('<Button-3>', exit)
+    root.bind('p', toggle_pir)
+    root.bind('i', toggle_ir)
+    w = FullscreenWindow()
+
+    try:
+        while True:
+            # Toggle reminders based on ir value
+            #print("PIR:", pir, "IR:", ir)
+            if ir == 1:
+                w.reminders.pack_forget()  # Hide reminders
+                w.news.pack(side=TOP, anchor=W, padx=0, pady=0)  # Show news
+                #w.recording_label.pack(anchor=CENTER)
+            else:
+                w.reminders.pack(side=TOP, anchor=W, padx=0, pady=0)  # Show reminders
+                w.news.pack_forget()  # Hide news
+                #w.recording_label.pack_forget()
+                
+            # Make all text invisible when pir == 0
+            if pir == 0:
+                make_text_invisible()
+            else:
+                make_text_visible()
+                
+            # Print the received data to verify
+            #print("PIR:", pir, "IR:", ir)
+            
+            # Update the Tkinter window
+            root.update_idletasks()
+            root.update()
+
+    finally:
+        # Close the serial port when done
+        #serial_port.close()
+        exit(0)'''
+
+    #make_text_invisible()
+    # Device 00:21:13:05:F0:64 HC-06
+    # ls /dev/rfcomm0
+    
     serial_port = serial.Serial('/dev/rfcomm0', baudrate=9600, timeout=1)
 
     pir = 0
@@ -498,9 +546,56 @@ if __name__ == '__main__':
     root = tkinter.Tk()
     # Bind the escape key to exit full-screen mode and close the application
     root.bind('<Button-3>', exit)
+    root.bind('p', toggle_pir)
+    root.bind('i', toggle_ir)
     w = FullscreenWindow()
-    w.tk.mainloop()
 
+    try:
+        while True:
+            # Read data from the HC-06 Bluetooth module
+            data = serial_port.readline().decode().strip()
+            
+            # Parse the received data
+            if data.startswith('p') and ' ' in data:
+                p_index = data.index(' ')
+                pir_str = data[1:p_index]
+                if pir_str.isdigit():
+                    pir = int(pir_str)
+                if 'i' in data:
+                    ir_str = data[data.index('i')+1:]
+                    if ir_str.isdigit():
+                        ir = int(ir_str)
+            
+            # Toggle reminders based on ir value
+            #print("PIR:", pir, "IR:", ir)
+            if ir == 1:
+                w.reminders.pack_forget()  # Hide reminders
+                w.news.pack(side=TOP, anchor=W, padx=0, pady=0)  # Show news
+                #w.recording_label.pack(anchor=CENTER)
+            else:
+                w.reminders.pack(side=TOP, anchor=W, padx=0, pady=0)  # Show reminders
+                w.news.pack_forget()  # Hide news
+                #w.recording_label.pack_forget()
+                
+            # Make all text invisible when pir == 0
+            if pir == 0:
+                make_text_invisible()
+            else:
+                make_text_visible()
+                
+            # Print the received data to verify
+            print("PIR:", pir, "IR:", ir)
+            
+            # Update the Tkinter window
+            root.update_idletasks()
+            root.update()
+
+    finally:
+        # Close the serial port when done
+        serial_port.close()
+        exit(0)
+
+'''
     try:
         while True:
             # Read data from the HC-06 Bluetooth module
@@ -538,7 +633,7 @@ if __name__ == '__main__':
         # Close the serial port when done
         serial_port.close()
         exit(0)
-
+'''
 
 
 
